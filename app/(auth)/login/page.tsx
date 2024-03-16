@@ -61,8 +61,8 @@ const Login: React.FC = () => {
             toast.success("登录成功");
             setTimeout(() => router.push("/"), 1000);
         } else {
-            form.setError("password", { message: "Invalid username or password" });
-            form.setValue("password", "");
+            form.setError("password", { message: "用户名或密码错误" });
+            form.setError("name", { message: "用户名或密码错误" });
         }
 
         setLoading(false);

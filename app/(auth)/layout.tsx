@@ -1,10 +1,19 @@
+"use client"
+
 import { PropsWithChildren } from "react";
 
 import Image from "next/image";
 import Header from "../(welcome)/_components/header";
 
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+
 const LoginLayout: React.FC<PropsWithChildren> = ({ children }) => {
-    
+    const { data: session } = useSession();
+
+    if (session?.user?.name) {
+        redirect("/");
+    }
 
     return (
         <div className="relative h-screen flex flex-col">
