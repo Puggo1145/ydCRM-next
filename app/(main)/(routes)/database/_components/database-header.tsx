@@ -1,36 +1,27 @@
+"use client"
+
+// shadcn components
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
-    Search,
-} from 'lucide-react';
-
-import {
     Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
     BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-
+// icons
+import { Search } from 'lucide-react';
+// components
 import ChooseAddObject from "./choose-add-object";
+// hooks
+import useBreadcrum from "@/hooks/useBreadcrum";
 
 const DatabaseHeader: React.FC = () => {
+    const breadcrumb = useBreadcrum();
+
     return (
         <section className="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
             <Breadcrumb>
                 <BreadcrumbList className="text-lg md:text-xl">
-                    <BreadcrumbItem>
-                        <BreadcrumbLink href="#">XX学校</BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                        <BreadcrumbLink href="#">XX老师</BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                        <BreadcrumbPage className="font-bold">XX学生</BreadcrumbPage>
-                    </BreadcrumbItem>
+                    {breadcrumb}
                 </BreadcrumbList>
             </Breadcrumb>
             <div className="flex items-center justify-between gap-x-8">

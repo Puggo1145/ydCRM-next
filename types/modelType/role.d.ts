@@ -1,0 +1,1 @@
+export type role = 'super_admin' | 'admin' | 'employee' | 'partime_employee';

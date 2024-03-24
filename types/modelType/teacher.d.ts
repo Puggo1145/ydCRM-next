@@ -1,5 +1,5 @@
 type TeacherStatus = "未对接" | "对接中" | "对接成功" | "对接失败"
-type TeacherType = "合作意向强" | "了解观望" | "无合作意向" 
+type TeacherType = "未知" | "合作意向强" | "了解观望" | "无合作意向" 
 
 export interface Teacher {
     _id: string & Schema.ObjectId

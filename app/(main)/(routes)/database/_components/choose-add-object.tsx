@@ -8,13 +8,15 @@ import {
     DialogClose,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button";
-
 import {
     Plus,
-    School, Users, GraduationCap
+    School as SchoolIcon, 
+    Users as UsersIcon, 
+    GraduationCap
 } from 'lucide-react';
-
 import AddObjectSheet from "./add-object-sheet";
+import { toast } from "sonner";
+import { useState } from "react";
 
 export type Objects = 'school' | 'teacher' | 'student';
 type ObjectAlias = '学校' | '老师' | '学生';
@@ -27,12 +29,12 @@ export const addObjects: addObjects[] = [
     {
         object: 'school',
         alias: '学校',
-        icon: <School size={32} />
+        icon: <SchoolIcon size={32} />
     },
     {
         object: 'teacher',
         alias: '老师',
-        icon: <Users size={32} />
+        icon: <UsersIcon size={32} />
     },
     {
         object: 'student',
@@ -41,13 +43,23 @@ export const addObjects: addObjects[] = [
     }
 ];
 
-import { useState } from "react";
+// stores
+import useSelectedSchool from "@/stores/databse/selectedSchool";
+import useSelectedTeacher from "@/stores/databse/selectedTeacher";
 
 const ChooseAddObject: React.FC = () => {
     const [targetObject, setTargetObject] = useState<Objects>();
     const [isSheetOpen, setIsSheetOpen] = useState(false);
 
+    const { selectedSchool } = useSelectedSchool();
+    const { selectedTeacher } = useSelectedTeacher();
+
     function triggerSheet(object: Objects) {
+        // 添加学校和老师需要先选择其父对象
+        if (object === 'teacher' && !selectedSchool) return toast.error('请先选择一个学校');
+        if (object === 'student' && !selectedTeacher) return toast.error('请先选择一个老师');
+
+        // 设定要打开 form 的对象，并打开 form
         setTargetObject(object);
         setIsSheetOpen(!isSheetOpen);
     }

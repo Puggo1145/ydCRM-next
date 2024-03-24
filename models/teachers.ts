@@ -8,41 +8,32 @@ const teacherSchema = new Schema<Teacher>({
         required: true,
     },
 
-    teacher_name: {
+    teacher_name: { // super-admin, admin, employee
         type: String,
         required: true,
-    },
-    teacher_sex: {
-        type: String,
-        required: true,
-    },
-    teacher_age: {
-        type: Number,
-        required: false,
-        default: ""
     },
 
-    teacher_phone: {
+    teacher_phone: { // super-admin, admin, employee
         type: String,
         required: true,
     },
-    teacher_wechat: {
+    teacher_wechat: { // super-admin, admin, employee
         type: String,
         required: false,
         default: ""
     },
-    teacher_class: {
+    teacher_class: { // super-admin, admin, employee
         type: String,
         required: false,
         default: ""
     },
-    teacher_type: {
+    teacher_type: { // super-admin, employee
         type: String,
         required: false,
-        enum: ["合作意向强", "了解观望", "无合作意向"],
+        enum: ["未知", "合作意向强", "了解观望", "无合作意向"],
     },
 
-    teacher_status: {
+    teacher_status: { // super-admin, employee
         type: String,
         required: true,
         enum: ["未对接", "对接中", "对接成功", "对接失败"],

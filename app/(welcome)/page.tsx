@@ -4,19 +4,10 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Loader from "@/components/loader";
 
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { useEffect } from "react";
 
 const WelcomePage: React.FC = () => {
   const { data: session, status } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.replace("/login");
-    }
-  }, [status]);
 
   return (
     <div className="h-full flex flex-col gap-y-4 items-center justify-center">

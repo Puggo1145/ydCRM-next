@@ -2,7 +2,6 @@
 
 import { PropsWithChildren } from "react";
 
-import DatabaseHeader from "./_components/database-header";
 import Loader from "@/components/loader";
 
 import { useState, useEffect } from "react";
@@ -24,7 +23,6 @@ const DatabaseLayout: React.FC<PropsWithChildren> = ({ children }) => {
 
     return (
         <div className="p-4 h-full flex flex-col gap-y-4">
-            <DatabaseHeader />
             <div className="flex-1">
                 {children}
             </div>

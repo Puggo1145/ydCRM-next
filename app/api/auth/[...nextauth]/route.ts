@@ -1,7 +1,9 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-const handler = NextAuth({
+import type { AuthOptions } from "next-auth";
+
+export const authOptions: AuthOptions = {
     secret: process.env.SECRET,
     providers: [
         CredentialsProvider({
@@ -23,7 +25,8 @@ const handler = NextAuth({
                     const user = await res.json();
 
                     return {
-                        id: user.id,
+                        id: user._id,
+                        role: user.role,
                         name: user.name,
                     };
                 }
@@ -36,17 +39,23 @@ const handler = NextAuth({
         async jwt({token, user}) {
             if (user) {
                 token.id = user.id;
+                token.role = user.role;
             }
 
             return token;
         },
         async session({session, token}) {
-            // @ts-expect-error ts 下 session 取不到 id
-            session.user.id = token.id;
+            session.user.id = token.id as string;
+            session.user.role = token.role as string;
             
             return session;
         }
     },
-})
+    pages: {
+        signIn: '/login',
+    }
+}
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

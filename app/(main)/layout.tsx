@@ -9,7 +9,6 @@ import UserInfo from "./_components/user-info";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 import { useState, useEffect } from "react";
 
 const MainLayout: React.FC<PropsWithChildren> = ({ children }) => {
@@ -27,11 +26,6 @@ const MainLayout: React.FC<PropsWithChildren> = ({ children }) => {
             </div>
         );
     }
-
-    if (status === "unauthenticated") {
-        return redirect("/");
-    }
-
 
     return (
         <div className="h-screen">
