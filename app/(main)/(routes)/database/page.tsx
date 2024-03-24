@@ -16,6 +16,7 @@ import TeacherList from "./_components/teacher-list";
 import StudentList from "./_components/student-list";
 // hooks
 import { useEffect, useRef } from "react";
+import { useMediaQuery } from "usehooks-ts";
 // stores
 import useSelectedSchool from "@/stores/databse/selectedSchool";
 import useSelectedTeacher from "@/stores/databse/selectedTeacher";
@@ -24,6 +25,8 @@ import type { ImperativePanelHandle } from "react-resizable-panels";
 
 
 const DatabasePage: React.FC = () => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   const { selectedSchool } = useSelectedSchool();
   const { selectedTeacher } = useSelectedTeacher();
 
@@ -55,7 +58,7 @@ const DatabasePage: React.FC = () => {
         <DatabaseHeader />
       </section>
       <Card className="h-full">
-        <ResizablePanelGroup direction="horizontal">
+        <ResizablePanelGroup direction={isMobile ? "vertical" : "horizontal"}>
           {/* school list panel */}
           <ResizablePanel
             minSize={10}

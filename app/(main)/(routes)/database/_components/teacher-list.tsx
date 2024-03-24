@@ -39,7 +39,7 @@ const TeacherList: React.FC = () => {
         getTeachers(selectedSchool._id);
     }, [selectedSchool]);
 
-    
+
     const getTeachers = async (school_id: string) => {
         setIsFetching(true);
         const res = await fetch(`/api/data/teacher?id=${school_id}`);
@@ -55,7 +55,7 @@ const TeacherList: React.FC = () => {
         setIsFetching(false);
     };
 
-    
+
     function selectTeacher(teacher: Teacher) {
         if (selectedTeacher?._id === teacher._id) {
             setSelectedTeacher(null);
@@ -78,25 +78,28 @@ const TeacherList: React.FC = () => {
 
 
     return (
-        <ul className="w-full flex flex-col p-2">
-            {allTeachers.map((teacher) => (
-                <li
-                    key={teacher._id}
-                    className={
-                        cn(
-                            "w-full h-10 px-4 rounded-md",
-                            "line-clamp-1 whitespace-nowrap text-sm",
-                            "flex items-center",
-                            "hover:bg-primary-foreground cursor-pointer",
-                            selectedTeacher?._id === teacher._id && "bg-primary text-white hover:bg-primary"
-                        )
-                    }
-                    onClick={() => selectTeacher(teacher)}
-                >
-                    {teacher.teacher_name}
-                </li>
-            ))}
-        </ul>
+        <div className="p-2 space-y-2">
+            <h1 className="text-lg font-bold p-4 border-b">班主任</h1>
+            <ul className="w-full flex flex-col">
+                {allTeachers.map((teacher) => (
+                    <li
+                        key={teacher._id}
+                        className={
+                            cn(
+                                "w-full h-10 px-4 rounded-md",
+                                "line-clamp-1 whitespace-nowrap text-sm",
+                                "flex items-center",
+                                "hover:bg-primary-foreground cursor-pointer",
+                                selectedTeacher?._id === teacher._id && "bg-primary text-white hover:bg-primary"
+                            )
+                        }
+                        onClick={() => selectTeacher(teacher)}
+                    >
+                        {teacher.teacher_name}
+                    </li>
+                ))}
+            </ul>
+        </div>
     );
 };
 

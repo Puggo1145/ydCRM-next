@@ -70,31 +70,34 @@ const SchoolList: React.FC = () => {
     )
 
     return (
-        <ul className="w-full flex flex-col p-2">
-            {allSchools.map((school) => (
-                <li
-                    key={school._id}
-                    className={
-                        cn(
-                            "w-full h-10 px-4 rounded-md",
-                            "line-clamp-1 whitespace-nowrap text-sm",
-                            "flex items-center justify-between",
-                            "hover:bg-primary-foreground cursor-pointer",
-                            "group",
-                            selectedSchool?._id === school._id && "bg-primary text-white hover:bg-primary font-bold"
-                        )
-                    }
-                    onClick={() => selectSchool(school)}
-                >
-                    {school.school_name}
-                    <ObjectAction 
-                        href="/database/school/" 
-                        id={school._id} 
-                        className={cn("invisible group-hover:visible", selectedSchool?._id === school._id && "text-white")} 
-                    />
-                </li>
-            ))}
-        </ul>
+        <div className="p-2 space-y-2">
+            <h1 className="text-lg font-bold p-4 border-b">学校</h1>
+            <ul className="w-full flex flex-col">
+                {allSchools.map((school) => (
+                    <li
+                        key={school._id}
+                        className={
+                            cn(
+                                "w-full h-10 px-4 rounded-md",
+                                "line-clamp-1 whitespace-nowrap text-sm",
+                                "flex items-center justify-between",
+                                "hover:bg-primary-foreground cursor-pointer",
+                                "group",
+                                selectedSchool?._id === school._id && "bg-primary text-white hover:bg-primary font-bold"
+                            )
+                        }
+                        onClick={() => selectSchool(school)}
+                    >
+                        {school.school_name}
+                        <ObjectAction
+                            href="/database/school/"
+                            id={school._id}
+                            className={cn("invisible group-hover:visible", selectedSchool?._id === school._id && "text-white")}
+                        />
+                    </li>
+                ))}
+            </ul>
+        </div>
     );
 };
 
